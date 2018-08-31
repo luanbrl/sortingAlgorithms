@@ -1,24 +1,25 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
-void printArray(int array[], int n) {
-  for (int i=0; i < n; i++) {
-    cout << array[i] << " ";
+void printArray(vector<int> &A, int n) {
+  for (int i=0; i<n; i++) {
+    cout << A[i] << " ";
   }
   cout << endl;
 }
 
-void insertionSort(int array[], int n) {
+void insertionSort(vector<int> &A, int n) {
   int i, j, aux;
 
   for (i=1; i<n; i++) {
     j = i;
-    while (array[j] < array[j-1] && j>0) {
-      aux = array[j];
-      array[j] = array[j-1];
-      array[j-1] = aux;
+    while (A[j] < A[j-1] && j>0) {
+      aux = A[j];
+      A[j] = A[j-1];
+      A[j-1] = aux;
       j--;
     }
   }
@@ -34,13 +35,14 @@ int main() {
   if (input.is_open()) {
     int n;
     input >> n;
-    int array[n];
+    vector<int> A;
+    A.resize(n);
 
     for (int i=0; i<n; i++) {
-      input >> array[i];
+      input >> A[i];
     }
-    insertionSort(array, n);
-    printArray(array, n);
+    insertionSort(A, n);
+    printArray(A, n);
 
   } else cout << "Erro ao abrir o arquivo." << endl;
 
