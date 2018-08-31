@@ -1,44 +1,43 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
-void printArray(int array[], int n) {
-  for (int i=0; i < n; i++) {
-    cout << array[i] << " ";
+void printArray(vector<int> &A, int n) {
+  for (int i=0; i<n; i++) {
+    cout << A[i] << " ";
   }
   cout << endl;
 }
 
-int partition(int array[], int initial, int end) {
-    int aux;
-    int left = initial, right = end;
-    int p = array[end];
+int partition(vector<int> &A, int initial, int end) {
+    int aux, left = initial, right = end, p = A[end];
 
-    while (left < right) {
-        while(array[left] <= p) {
+    while (left<right) {
+        while (A[left]<=p) {
             left++;
         }
-        while(array[right] > p) {
+        while (A[right]>p) {
             right--;
         }
-        if(left < right) {
-            aux = array[left];
-            array[left] = array[right];
-            array[right] = aux;
+        if (left<right) {
+            aux = A[left];
+            A[left] = A[right];
+            A[right] = aux;
         }
     }
-    array[initial] = array[right];
-    array[right] = p;
+    A[initial] = A[right];
+    A[right] = p;
 
     return right;
 }
 
-void quickSort(int array[], int initial, int end) {
-    if(initial<end) {
-        int p = partition(array, initial, end);
-        quickSort(array, initial, p-1);
-        quickSort(array, p+1, end);
+void quickSort(vector<int> &A, int initial, int end) {
+    if (initial<end) {
+        int p = partition(A, initial, end);
+        quickSort(A, initial, p-1);
+        quickSort(A, p+1, end);
     }
 }
 
@@ -52,13 +51,14 @@ int main() {
   if (input.is_open()) {
     int n;
     input >> n;
-    int array[n];
+    vector<int> A;
+    A.resize(n);
 
     for (int i=0; i<n; i++) {
-      input >> array[i];
+      input >> A[i];
     }
-    quickSort(array, 0, n-1);
-    printArray(array, n);
+    quickSort(A, 0, n-1);
+    printArray(A, n);
 
   } else cout << "Erro ao abrir o arquivo." << endl;
 
