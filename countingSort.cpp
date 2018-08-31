@@ -19,14 +19,14 @@ void countingSort(vector<int> &A, int n, int max) {
   for (i=0; i<n; i++) {
     ++B[A[i]];
   }
-  for (i=0; i<=max; i++) {
+  for (i=2; i<=max; i++) {
     B[i] += B[i-1];
   }
-  for (i=0; i<n; i++) {
+  for (i=n-1; i>=0; i--) {
     C[B[A[i]]-1] = A[i];
     --B[A[i]];
   }
-  for (i=0; i<=n; i++) {
+  for (i=0; i<n; i++) {
     A[i] = C[i];
   }
 }
